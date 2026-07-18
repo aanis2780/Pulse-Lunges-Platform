@@ -7,14 +7,26 @@ This platform is a specialized medical training tool designed to bridge the gap 
 ## Architecture Overview
 The application is structured into a client-server model using a decoupled architecture for the AI processing module.
 
+## Architecture
+
 ```text
-User / Student
-      |
-      v
-[Web Interface: PHP Frontend] 
-      |  (Fetch / Save Data)   |  (Semantic Analysis Request)
-      v                        v
-[MySQL Database]        [Flask API / Python (DrBERT)]
++-------------------------------------------------------+
+|                USER INTERFACE (Browser)               |
+|  [Quiz 1: Audio]  [Quiz 2: Audio]  [Quiz 3: AI/NLP]   |
++---------------------------+---------------------------+
+                            |
+                            v
++---------------------------+---------------------------+
+|               PHP WEB SERVER (Apache)                 |
+|   - Session Management    - MySQL DB (MP3 Assets)     |
++-------------+---------------------------+-------------+
+              |                           |
+              | (SQL Queries)             | (cURL / API)
+              v                           v
++-------------+-------------+   +-----------------------+
+|  MySQL DATABASE (8.0)     |   |   FLASK API (Python)  |
+| (Student/Quiz/MP3 Data)   |   | (NLP Engine / DrBERT) |
++---------------------------+   +-----------------------+
 
 ## Installation for Users
 1. Clone the repository: `git clone <url>`
