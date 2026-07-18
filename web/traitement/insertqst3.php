@@ -8,7 +8,7 @@ capterConnexion($_SESSION['teacher_id']);
 
 
 // Connexion à la base
-$conn = new mysqli("localhost", "root", "", "school");
+$conn = new mysqli("db", "root", "root_password", "school");
 if ($conn->connect_error) {
     die("Erreur de connexion: " . $conn->error);
 }

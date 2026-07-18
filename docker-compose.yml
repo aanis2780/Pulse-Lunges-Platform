@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  
+  web:
+    image: php:8.2-apache
+    volumes:
+      - ./web:/var/www/html
+    command: /bin/sh -c "docker-php-ext-install mysqli pdo pdo_mysql && apache2-foreground"
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+    depends_on:
+      - db
+      - ai
   db:
     image: mysql:8.0
     environment:
@@ -13,23 +26,12 @@ services:
 
   ai:
     build: ./ai_engine
+    ports:
+      - "5000:5000"
     volumes:
       - ./ai_engine/model:/app/model
     networks:
       - app-network
-
-  web:
-    build: ./web
-    ports:
-      - "8080:80"
-    volumes:
-      - ./web:/var/www/html
-    depends_on:
-      - db
-      - ai
-    networks:
-      - app-network
-
   adminer:
     image: adminer
     restart: always
