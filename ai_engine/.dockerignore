@@ -1,8 +1,0 @@
-# Ignore les dossiers inutiles pour la construction de l'image
-__pycache__
-.git
-.env
-.vscode
-model/
-__pycache__/
-*.pyc
