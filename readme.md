@@ -26,7 +26,9 @@ The application is structured into a client-server model using a decoupled archi
 +-------------+-------------+   +-----------------------+
 |  MySQL DATABASE (8.0)     |   |   FLASK API (Python)  |
 | (Student/Quiz/MP3 Data)   |   | (NLP Engine / DrBERT) |
-+---------------------------+   +-----------------------+
++---------------------------+   +-----------------------+ 
+
+
 
 ## Installation for Users
 1. Clone the repository: `git clone <url>`
