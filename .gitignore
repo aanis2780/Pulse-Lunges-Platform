@@ -8,3 +8,4 @@ __pycache__/
 # Tes données lourdes (le modèle 5Go et le dataset)
 ai_engine/model/
 /data
+web/school.sql
