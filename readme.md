@@ -9,16 +9,10 @@ The application is structured into a client-server model using a decoupled archi
 
 ```mermaid
 graph TD
-    subgraph "Client Side"
-        User[User (Student/Instructor)] -->|HTTP/HTTPS| WebApp[PHP Web Application]
-        WebApp -->|Quiz & Audio (MP3)| User
-    end
-
-    subgraph "Server Environment (Docker)"
-        WebApp -->|SQL Queries| DB[(MySQL Database)]
-        WebApp -->|Clinical Query| Flask[Flask AI API (Python)]
-        Flask -->|Semantic Analysis (DrBERT)| Flask
-    end
+    User[User / Student] --> UI[Web Interface: PHP Frontend]
+    UI --> |Fetch / Save Data| DB[(MySQL Database)]
+    UI --> |Semantic Analysis Request| API[Flask API / Python]
+    API --> |Load Model| Model[DrBERT Model]
 
 ## Installation for Users
 1. Clone the repository: `git clone <url>`
