@@ -70,7 +70,7 @@ The fine-tuning process is automated via the `train.py` script. Key technical ch
 
 ## Project Status & Limitations
 - **Availability:** This project is a private academic repository. Only a small, representative sample of the codebase and datasets has been published on GitHub for demonstration purposes.
-- **NLP Performance:** The model (DrBERT) has been fine-tuned on a custom, annotated clinical dataset. While it is highly specialized and efficient for the 8 defined medical categories, it may show limitations in semantic nuance compared to general-purpose LLMs like GPT-4.
+- **NLP Performance:** The model (DrBERT) has been fine-tuned on a custom, annotated clinical dataset. While it is highly specialized and efficient for the 8 defined medical categories, it may show limitations in semantic nuance compared to general-purpose LLMs like GPT-4. Furthermore, this model serves strictly as an educational evaluation tool; it is not intended for real-world diagnostic use without clinical oversight.
 - **Language Nuance:** The model is optimized for French medical terminology. It may occasionally struggle with colloquialisms or highly complex sentence structures outside of the provided clinical context.
 - **System Constraints:** Audio file latency may occur on low-bandwidth networks during the quiz modules.
 - **Environment:** Session synchronization between the PHP frontend and the Flask AI service requires consistent host configuration within the Docker environment.
