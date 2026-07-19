@@ -1,3 +1,15 @@
+"""
+Medical Quiz Platform - Model Training Pipeline
+-----------------------------------------------
+Description: Fine-tuning of DrBERT for clinical semantic classification.
+Author: Abbas Anis
+Project: Bachelor's Final Year Project
+Requirements: transformers, torch, pandas, scikit-learn, datasets
+
+Model: Dr-BERT/DrBERT-4GB
+Task: Multi-class sequence classification for 8 medical categories.
+"""
+
 import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trainer, TrainingArguments
@@ -53,11 +65,10 @@ model = AutoModelForSequenceClassification.from_pretrained(
 # Entraînement
 training_args = TrainingArguments(
     output_dir="./model",
-    evaluation_strategy="epoch",
-    save_strategy="epoch",
-    num_train_epochs=4,
-    per_device_train_batch_size=4,
-    per_device_eval_batch_size=4,
+    evaluation_strategy="epoch",    # Évaluation systématique à chaque fin d'époque pour suivre la convergence
+    save_strategy="epoch",      # Sauvegarde des checkpoints par époque
+    num_train_epochs=4,    # 4 époques assurent un apprentissage suffisant sans risquer le surapprentissage 
+    per_device_eval_batch_size=4,   # Batch size fixé à 4 pour optimiser l'utilisation de la VRAM lors de l'inférence/évaluation
     logging_dir="./logs",
     load_best_model_at_end=True,
     metric_for_best_model="eval_loss"
@@ -72,6 +83,10 @@ trainer = Trainer(
 )
 
 trainer.train()
+
+#Evaluation
+results = trainer.evaluate()
+print(f"Final Evaluation Results: {results}")
 
 # Sauvegarde finale
 trainer.save_model("model")

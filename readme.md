@@ -7,6 +7,23 @@ This platform is a specialized medical training tool designed to bridge the gap 
 ## Architecture Overview
 The application is structured into a client-server model using a decoupled architecture for the AI processing module.
 
+
+## AI Engine: Data & Model Training
+
+To ensure accurate clinical classification, the system uses a fine-tuned version of **DrBERT**, a transformer model pre-trained on French medical corpus.
+
+### 1. Dataset
+The model was trained on a categorized clinical dataset. A sample of the input data structure is available in `ai_engine/dataset_sample.csv`:
+* **question**: The clinical query posed to the patient.
+* **theme**: The semantic category (e.g., `douleur thoracique`, `irradiation`, `antécédents cardiovasculaires`).
+
+### 2. Training Pipeline (`train.py`)
+The fine-tuning process is automated via the `train.py` script. Key technical choices include:
+* **Model**: [Dr-BERT/DrBERT-4GB](https://huggingface.co/Dr-BERT/DrBERT-4GB) (Specialized for French medical language).
+* **Preprocessing**: Automated cleaning of duplicate labels and semantic normalization.
+* **Optimization**: Use of `Trainer` API with `load_best_model_at_end=True` to prevent overfitting based on validation loss.
+* **Deployment**: The resulting model is saved with a custom `label_mapping.txt` to allow dynamic inference in the Flask microservice.
+
 ## Architecture
 
 ```text
@@ -30,9 +47,8 @@ The application is structured into a client-server model using a decoupled archi
 ```
 
 
-
 ## Installation for Users
-1. Clone the repository: `git clone <url>`
+1. Clone the repository: `git clone https://github.com/aanis2780/Pulse-Lunges-Platform#architecture`
 2. Ensure Docker and Docker Compose are installed on your machine.
 3. Run the services: `docker-compose up -d --build`
 4. Access the dashboard via your browser at: `http://localhost:8080`
